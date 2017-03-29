@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageViewPhoto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="0dp"
+        android:text="Ronaldo"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toRightOf="@+id/imageViewPhoto"
+        app:layout_constraintTop_toTopOf="@+id/imageViewPhoto" />
+
+    <TextView
+        android:id="@+id/textViewAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="8dp"
+        android:text="30 years old"
+        app:layout_constraintLeft_toLeftOf="@+id/textViewName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+    <ImageView
+        android:id="@+id/imageViewBall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_ball"
+        tools:layout_editor_absoluteY="98dp"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/textViewAge" />
+
+    <TextView
+        android:id="@+id/textViewGoals"
+        android:layout_width="61dp"
+        android:layout_height="15dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="0dp"
+        android:text="8000"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewBall"
+        app:layout_constraintLeft_toRightOf="@+id/imageViewBall"
+        app:layout_constraintTop_toTopOf="@+id/imageViewBall"
+        app:layout_constraintVertical_bias="0.555" />
+</android.support.constraint.ConstraintLayout>
