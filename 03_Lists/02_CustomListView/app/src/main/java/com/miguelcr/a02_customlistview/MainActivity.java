@@ -2,6 +2,9 @@ package com.miguelcr.a02_customlistview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -38,7 +41,18 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
+        // We connect the listView with the ContextMenu
+        // If you do a long click on the list the context menu appear.
+        registerForContextMenu(listView);
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
 
     }
 }
