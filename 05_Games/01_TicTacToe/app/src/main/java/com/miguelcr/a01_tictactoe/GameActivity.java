@@ -1,8 +1,10 @@
 package com.miguelcr.a01_tictactoe;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -135,6 +137,7 @@ public class GameActivity extends AppCompatActivity {
                     if (checkSolution()) {
                         Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
                         gameFinished = true;
+                        showDialog();
                     } else {
                         isPlayingPlayer1 = false;
                     }
@@ -146,6 +149,7 @@ public class GameActivity extends AppCompatActivity {
                     if (checkSolution()) {
                         Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
                         gameFinished = true;
+                        showDialog();
                     } else {
                         isPlayingPlayer1 = true;
                     }
@@ -165,41 +169,69 @@ public class GameActivity extends AppCompatActivity {
 
 
         if(selectedCells[0]==selectedCells[1] &&
-                selectedCells[1]==selectedCells[2]) {
+                selectedCells[1]==selectedCells[2] && selectedCells[2]!=0) {
             // 0, 1, 2 > 1st row
             existSolution = true;
         } else if(selectedCells[3]==selectedCells[4] &&
-                selectedCells[4]==selectedCells[5]) {
+                selectedCells[4]==selectedCells[5] && selectedCells[5]!=0) {
             // 3, 4, 5, > 2nd row
             existSolution = true;
         } else if(selectedCells[6]==selectedCells[7] &&
-                selectedCells[7]==selectedCells[8]) {
+                selectedCells[7]==selectedCells[8] && selectedCells[8]!=0) {
             // 6,7,8 > 3rd row
             existSolution = true;
         } else if(selectedCells[0]==selectedCells[3] &&
-                selectedCells[3]==selectedCells[6]) {
+                selectedCells[3]==selectedCells[6] && selectedCells[6]!=0) {
             // 0,3,6 > 1st col
             existSolution = true;
         } else if(selectedCells[1]==selectedCells[4] &&
-                selectedCells[4]==selectedCells[7]) {
+                selectedCells[4]==selectedCells[7] && selectedCells[7]!=0) {
             // 1,4,7 > 2nd col
             existSolution = true;
         } else if(selectedCells[2]==selectedCells[5] &&
-                selectedCells[5]==selectedCells[8]) {
+                selectedCells[5]==selectedCells[8] && selectedCells[8]!=0) {
             // 2,5,8 > 3rd col
             existSolution = true;
         } else if(selectedCells[0]==selectedCells[4] &&
-                selectedCells[4]==selectedCells[8]) {
+                selectedCells[4]==selectedCells[8] && selectedCells[8]!=0) {
             // 0,4,8 > left diagonal
             existSolution = true;
         } else if(selectedCells[2]==selectedCells[4] &&
-                selectedCells[4]==selectedCells[6]) {
+                selectedCells[4]==selectedCells[6] && selectedCells[6]!=0) {
             // 2,4,6 > right diagonal
             existSolution = true;
         }
 
 
         return existSolution;
+    }
+
+    public void showDialog() {
+        // 1. Instantiate an AlertDialog.Builder with its constructor
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // 2. Chain together various setter methods to set the dialog characteristics
+        builder.setMessage("Select one option to restart the game or exit")
+                        .setTitle("TicTacToe");
+
+        // Add the buttons
+        builder.setPositiveButton("Restart", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+            }
+        });
+        builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+
+
+
+        // 3. Get the AlertDialog from create()
+        AlertDialog dialog = builder.create();
+
+
     }
 
 }
