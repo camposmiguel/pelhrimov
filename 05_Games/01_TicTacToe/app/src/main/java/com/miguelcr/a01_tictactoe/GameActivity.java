@@ -54,8 +54,7 @@ public class GameActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                showDialog();
             }
         });
 
@@ -66,7 +65,7 @@ public class GameActivity extends AppCompatActivity {
         imageViewCell4 = (ImageView) findViewById(R.id.cell4);
         imageViewCell5 = (ImageView) findViewById(R.id.cell5);
         imageViewCell6 = (ImageView) findViewById(R.id.cell6);
-        imageViewCell7 = (ImageView) findViewById(R.id.cell1);
+        imageViewCell7 = (ImageView) findViewById(R.id.cell7);
         imageViewCell8 = (ImageView) findViewById(R.id.cell8);
         imageViewCell9 = (ImageView) findViewById(R.id.cell9);
 
@@ -98,6 +97,7 @@ public class GameActivity extends AppCompatActivity {
                 case R.id.cell2:
                     imageViewCurrent = imageViewCell2;
                     position = 1;
+                    break;
                 case R.id.cell3:
                     imageViewCurrent = imageViewCell3;
                     position = 2;
@@ -217,21 +217,43 @@ public class GameActivity extends AppCompatActivity {
         // Add the buttons
         builder.setPositiveButton("Restart", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK button
+
+                restartGame();
+
+
             }
         });
         builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog
+                // Destroy the current screen and return
+                // to the login screen
+                finish();
             }
         });
 
-
+        // is not possible to close the dialog
+        // if you want to close you must to select one dialog option
+        builder.setCancelable(false);
 
         // 3. Get the AlertDialog from create()
         AlertDialog dialog = builder.create();
 
+        // Show the dialog in the screen
+        dialog.show();
 
+
+    }
+
+    private void restartGame() {
+
+        // Restart the selectedCells array to 0 value
+
+        // all the images View to empty icon
+
+        // isPlayingPlayer1 = true and change textViewPlayer1
+
+        
     }
 
 }
