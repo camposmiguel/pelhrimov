@@ -20,6 +20,7 @@ public class GameActivity extends AppCompatActivity {
     boolean isPlayingPlayer1 = true;
     String name1, name2;
     boolean gameFinished = false;
+    boolean isRemiza;
 
     /*
     |  0  |  1 |  2 |
@@ -81,7 +82,7 @@ public class GameActivity extends AppCompatActivity {
 
     public void cellClicked(View v) {
 
-        if(gameFinished) {
+        if (gameFinished) {
             Toast.makeText(this, "Game finished, restart the game", Toast.LENGTH_SHORT).show();
         } else {
             int id = v.getId();
@@ -135,7 +136,11 @@ public class GameActivity extends AppCompatActivity {
                     selectedCells[position] = 1;
 
                     if (checkSolution()) {
-                        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
+                        if(isRemiza) {
+                            Toast.makeText(this, "Nobody won!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
+                        }
                         gameFinished = true;
                         showDialog();
                     } else {
@@ -147,7 +152,12 @@ public class GameActivity extends AppCompatActivity {
                     selectedCells[position] = 2;
 
                     if (checkSolution()) {
-                        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
+                        if(isRemiza) {
+                            Toast.makeText(this, "Nobody won!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
+                        }
+
                         gameFinished = true;
                         showDialog();
                     } else {
@@ -167,8 +177,15 @@ public class GameActivity extends AppCompatActivity {
     public boolean checkSolution() {
         boolean existSolution = false;
 
+        isRemiza = true;
+        for(int i=0; i<9; i++) {
+            if(selectedCells[i]==0)
+                isRemiza = false;
+        }
 
-        if(selectedCells[0]==selectedCells[1] &&
+        if(isRemiza) {
+            existSolution = true;
+        } else if(selectedCells[0]==selectedCells[1] &&
                 selectedCells[1]==selectedCells[2] && selectedCells[2]!=0) {
             // 0, 1, 2 > 1st row
             existSolution = true;
@@ -248,12 +265,26 @@ public class GameActivity extends AppCompatActivity {
     private void restartGame() {
 
         // Restart the selectedCells array to 0 value
+        for(int i = 0; i<9; i++) {
+            selectedCells[i] = 0;
+        }
 
         // all the images View to empty icon
+        imageViewCell1.setImageResource(R.drawable.ic_empty);
+        imageViewCell2.setImageResource(R.drawable.ic_empty);
+        imageViewCell3.setImageResource(R.drawable.ic_empty);
+        imageViewCell4.setImageResource(R.drawable.ic_empty);
+        imageViewCell5.setImageResource(R.drawable.ic_empty);
+        imageViewCell6.setImageResource(R.drawable.ic_empty);
+        imageViewCell7.setImageResource(R.drawable.ic_empty);
+        imageViewCell8.setImageResource(R.drawable.ic_empty);
+        imageViewCell9.setImageResource(R.drawable.ic_empty);
 
         // isPlayingPlayer1 = true and change textViewPlayer1
+        gameFinished = false;
+        player.setText(name1);
+        isPlayingPlayer1 = true;
 
-        
     }
 
 }
