@@ -17,6 +17,8 @@ public class GameActivity extends AppCompatActivity {
     imageViewCell7,imageViewCell8,imageViewCell9;
     boolean isPlayingPlayer1 = true;
     String name1, name2;
+    boolean gameFinished = false;
+
     /*
     |  0  |  1 |  2 |
     -----------------
@@ -77,75 +79,82 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void cellClicked(View v) {
-        int id = v.getId();
 
-        int position = 0;
-        ImageView imageViewCurrent = null;
+        if(gameFinished) {
+            Toast.makeText(this, "Game finished, restart the game", Toast.LENGTH_SHORT).show();
+        } else {
+            int id = v.getId();
 
-        switch (id) {
-            case R.id.cell1:
-                imageViewCurrent = imageViewCell1;
-                position = 0;
-                break;
-            case R.id.cell2:
-                imageViewCurrent = imageViewCell2;
-                position = 1;
-            case R.id.cell3:
-                imageViewCurrent = imageViewCell3;
-                position = 2;
-                break;
-            case R.id.cell4:
-                imageViewCurrent = imageViewCell4;
-                position = 3;
-                break;
-            case R.id.cell5:
-                imageViewCurrent = imageViewCell5;
-                position = 4;
-                break;
-            case R.id.cell6:
-                imageViewCurrent = imageViewCell6;
-                position = 5;
-                break;
-            case R.id.cell7:
-                imageViewCurrent = imageViewCell7;
-                position = 6;
-                break;
-            case R.id.cell8:
-                imageViewCurrent = imageViewCell8;
-                position = 7;
-                break;
-            case R.id.cell9:
-                imageViewCurrent = imageViewCell9;
-                position = 8;
-                break;
-        }
+            int position = 0;
+            ImageView imageViewCurrent = null;
 
-        if(selectedCells[position]==0) {
-            if(isPlayingPlayer1) {
-                player.setText(name2);
-                imageViewCurrent.setImageResource(R.drawable.ic_player1);
-                selectedCells[position] = 1;
-
-                if(checkSolution()) {
-                    Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
-                } else {
-                    isPlayingPlayer1 = false;
-                }
-            } else {
-                player.setText(name1);
-                imageViewCurrent.setImageResource(R.drawable.ic_player2);
-                selectedCells[position] = 2;
-
-                if(checkSolution()) {
-                    Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
-                } else {
-                    isPlayingPlayer1 = true;
-                }
+            switch (id) {
+                case R.id.cell1:
+                    imageViewCurrent = imageViewCell1;
+                    position = 0;
+                    break;
+                case R.id.cell2:
+                    imageViewCurrent = imageViewCell2;
+                    position = 1;
+                case R.id.cell3:
+                    imageViewCurrent = imageViewCell3;
+                    position = 2;
+                    break;
+                case R.id.cell4:
+                    imageViewCurrent = imageViewCell4;
+                    position = 3;
+                    break;
+                case R.id.cell5:
+                    imageViewCurrent = imageViewCell5;
+                    position = 4;
+                    break;
+                case R.id.cell6:
+                    imageViewCurrent = imageViewCell6;
+                    position = 5;
+                    break;
+                case R.id.cell7:
+                    imageViewCurrent = imageViewCell7;
+                    position = 6;
+                    break;
+                case R.id.cell8:
+                    imageViewCurrent = imageViewCell8;
+                    position = 7;
+                    break;
+                case R.id.cell9:
+                    imageViewCurrent = imageViewCell9;
+                    position = 8;
+                    break;
             }
 
+            if (selectedCells[position] == 0) {
+                if (isPlayingPlayer1) {
+                    player.setText(name2);
+                    imageViewCurrent.setImageResource(R.drawable.ic_player1);
+                    selectedCells[position] = 1;
 
-        } else {
-            Toast.makeText(this, "The selected cell is not empty", Toast.LENGTH_SHORT).show();
+                    if (checkSolution()) {
+                        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
+                        gameFinished = true;
+                    } else {
+                        isPlayingPlayer1 = false;
+                    }
+                } else {
+                    player.setText(name1);
+                    imageViewCurrent.setImageResource(R.drawable.ic_player2);
+                    selectedCells[position] = 2;
+
+                    if (checkSolution()) {
+                        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
+                        gameFinished = true;
+                    } else {
+                        isPlayingPlayer1 = true;
+                    }
+                }
+
+
+            } else {
+                Toast.makeText(this, "The selected cell is not empty", Toast.LENGTH_SHORT).show();
+            }
         }
 
 
