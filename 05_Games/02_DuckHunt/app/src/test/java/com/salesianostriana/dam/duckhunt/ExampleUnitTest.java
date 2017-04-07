@@ -1,4 +1,4 @@
-package com.miguelcr.a02_duckhunt;
+package com.salesianostriana.dam.duckhunt;
 
 import org.junit.Test;
 

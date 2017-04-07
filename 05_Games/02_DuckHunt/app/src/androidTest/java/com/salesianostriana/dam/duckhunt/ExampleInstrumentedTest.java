@@ -1,4 +1,4 @@
-package com.miguelcr.a02_duckhunt;
+package com.salesianostriana.dam.duckhunt;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.miguelcr.a02_duckhunt", appContext.getPackageName());
+        assertEquals("com.salesianostriana.dam.duckhunt", appContext.getPackageName());
     }
 }
